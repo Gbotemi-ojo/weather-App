@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>weather</title>
+</head>
+
+<body>
+    <div class="theapp">
+        <div id="firstPage">
+            <div class="searchContainer">
+                <button class="searchBtn">Search for places</button>
+                <div class="LocationBtn"><img src="https://www.freeiconspng.com/uploads/location-target-icon-3.png"
+                        alt=""></div>
+            </div>
+            <div>
+                <div class="backgroundImg"><img src="weather-app-master/LightCloud.png" alt="" class="todayWeatherImg">
+                </div>
+                <div>
+                    <span class="todayTemp">15</span><sup>o</sup><span>C</span>
+                </div>
+                <div class="tempDetail">
+                    Shower
+                </div>
+            </div>
+            <div class="dateDetails">
+                <div><span>Today</span><span>.</span><span>Mon,5,jan</span></div>
+                <div>
+                    <span>
+                        <img src="https://www.clipartmax.com/png/middle/319-3193163_location-svg-png-icon-free-download-392730-great-day-free-white-location.png"
+                            alt="" class="locationImg">
+                    </span>
+                    <span>Tokyo</span>
+                </div>
+            </div>
+        </div>
+        <div class="searchPageContainer">
+            <div class="searchPage">
+                <div>
+                    <div class="cancelBtn">&#10006</div>
+                </div>
+                <div class="search">
+                    <div>
+                        <img src="weather-app-master/magnifying-glass-3-64.ico" alt="">
+                         <input type="text" class="inputLocation" placeholder="search location">
+                     </div>
+                    <button>Search</button>
+                </div>
+                <div class="searchHistoryContainer">
+                    <div>London</div>
+                    <div>Barcelona</div>
+                </div>
+            </div>
+        </div>
+        <div class="weatherInfo">
+            <div>
+                <div class="conversionBtnContainer">
+                    <button class="celciusBtn"><span><sup>o</sup>C</span></button>
+                    <button class="farenheitBtn"><span><sup>o</sup>F</span></button>
+                </div>
+                <div class="futureCastContainer">
+                    <div>
+                        <div>Tomorrow</div>
+                        <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
+                        <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <!-- if temp === 15,make min temp 13 and max temp 17 -->
+                    </div>
+                    <div>
+                        <div>Jan 11</div>
+                        <div><img src="weather-app-master/Shower.png" alt="" class="futureCastImg"></div>
+                        <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <!-- if temp === 15,make min temp 13 and max temp 17 -->
+                    </div>
+                    <div>
+                        <div>Jan 12</div>
+                        <div><img src="weather-app-master/Sleet.png" alt="" class="futureCastImg"></div>
+                        <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <!-- if temp === 15,make min temp 13 and max temp 17 -->
+                    </div>
+                    <div>
+                        <div>Jan 13</div>
+                        <div><img src="weather-app-master/Clear.png" alt="" class="futureCastImg"></div>
+                        <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <!-- if temp === 15,make min temp 13 and max temp 17 -->
+                    </div>
+                    <div>
+                        <div>Jan 14</div>
+                        <div><img src="weather-app-master/Hail.png" alt="" class="futureCastImg"></div>
+                        <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <!-- if temp === 15,make min temp 13 and max temp 17 -->
+                    </div>
+                </div>
+                <div class="weatherStatusContainer">
+                    <div>Today's HighLight.</div>
+                    <div class="weatherStatus">
+                        <div>
+                            <div class="weatherType">Wind Status</div>
+                            <div class="weatherValue"><span>7</span><span>Mph</span></div>
+                            <div class="arrowImgContainer">
+                                <div class="arrowImg"><img
+                                        src="https://www.pngimages.pics/images/quotes/english/general/transparent-45-degree-angle-arrow-52650-152615.png">
+                                </div>
+                                <span>WSW</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="weatherType">Humidity</div>
+                            <div class="weatherValue">84%</div>
+                            <div class="rangeDisplay">
+                                <div class="rangeValue"><span>0</span><span>50</span><span>100</span></div>
+                                <input type="range" min="0" max="100" value="84" disabled class="inputRange">
+                                <div class="percentageSymbol">%</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="weatherType">Visibilty</div>
+                            <div class="weatherValue">6,4 Miles</div>
+                        </div>
+                        <div>
+                            <div class="weatherType">Air Pressure</div>
+                            <div class="weatherValue"><span>99</span><sup>8</sup>MB</div>
+                        </div>
+                    </div>
+                    <div class="credit">Created by Gbotemi - devChallenges.io</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
