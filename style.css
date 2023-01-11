@@ -386,66 +386,94 @@ img {
 }
 
 @media(min-width: 1300px) and (max-width:1400px) {
-    .theapp{
+    .theapp {
         margin-left: 200px;
     }
 }
-@media(min-width:1200px) and (max-width:1300px){
-    .theapp{
+
+@media(min-width:1200px) and (max-width:1300px) {
+    .theapp {
         margin-left: 300px;
     }
 }
+
 @media(min-width:1100px) and (max-width:1200px) {
     .theapp {
         margin-left: 400px;
     }
 }
+
 @media(min-width:1000px) and (max-width:1100px) {
     .theapp {
         margin-left: 500px;
     }
 }
+
 @media(min-width:900px) and (max-width:1000px) {
     .theapp {
         margin-left: 600px
     }
 }
+
 @media(min-width:800px) and (max-width:900px) {
     .theapp {
         margin-left: 700px;
     }
 }
+
 @media(min-width:700px) and (max-width:800px) {
     .theapp {
         margin-left: 800px;
     }
 }
+
 @media(min-width:600px) and (max-width:700px) {
     .theapp {
         margin-left: 900px;
     }
 }
+
 @media(min-width:500px) and (max-width:600px) {
     .theapp {
         margin-left: 1000px;
     }
 }
+
 @media(min-width:400px) and (max-width:500px) {
     .theapp {
         margin-left: 1100px;
-    }
-    .theapp > div:first-child{
-        width: 100vw;
-    }
-}
-@media(min-width:400px) and (max-width:500px) {
-    .theapp {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
     }
+
+    .theapp>div:first-child {
+        width: 100vw;
+    }
+
+    #firstPage {
+        width: 100%;
+        grid-column: 1 3;
+    }
 }
 
-        /* .theapp>div:first-child {
+@media(min-width:300px) and (max-width:400px) {
+    .theapp {
+        margin-left: 1200px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .theapp>div:first-child {
+        width: 100vw;
+    }
+
+    #firstPage {
+        width: 100%;
+        grid-column: 1 3;
+    }
+}
+
+/* .theapp>div:first-child {
             height: 100%;
             width: 400px;
         }
