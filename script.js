@@ -106,11 +106,62 @@ async function searchLocation(){
 }
 const searchHistoryContainer = document.querySelector('.searchHistoryContainer');
 searchBtn.addEventListener('click', () => {
-   let div =  document.createElement('div');
-   div.textContent = inputLocation.value;
-   searchHistoryContainer.append(div);
+   let searchText =  document.createElement('div');
+   searchText.textContent = inputLocation.value;
+   let deleteBtn = document.createElement('span');
+   deleteBtn.textContent = 'X';
+   searchText.setAttribute('class','previousSearch');
+   deleteBtn.setAttribute('class','deleteBtn');
+   searchHistoryContainer.append(searchText);
+   searchText.append(deleteBtn);
 })
-
+searchHistoryContainer.addEventListener('click',(e)=>{
+    if(e.target.className === 'deleteBtn'){
+        e.target.parentElement.remove();
+    }
+})
+searchHistoryContainer.addEventListener('click',async (e)=>{
+    try {
+        const userData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target.firstChild.textContent}&APPID=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
+        const jsonData = await userData.json();
+        const latitude = jsonData.coord.lat;
+        const longitude = jsonData.coord.lon;
+        let getUrl = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
+        let getUrlJson = await getUrl.json();
+        let imgId = await getUrlJson.list[0].weather[0].icon;
+        let todayTemp = await(getUrlJson.list[0].main.feels_like - 273).toFixed(2)
+        minTemp1.textContent = (await getUrlJson.list[8].main.temp_min - 273).toFixed(2)
+        maxTemp1.textContent = (await getUrlJson.list[8].main.temp_max - 273).toFixed(2)
+        minTemp2.textContent = (await getUrlJson.list[16].main.temp_min - 273).toFixed(2)
+        maxTemp2.textContent = (await getUrlJson.list[16].main.temp_max - 273).toFixed(2)
+        minTemp3.textContent = (await getUrlJson.list[24].main.temp_min - 273).toFixed(2)
+        maxTemp3.textContent = (await getUrlJson.list[24].main.temp_max - 273).toFixed(2)
+        minTemp4.textContent = (await getUrlJson.list[30].main.temp_min - 273).toFixed(2)
+        maxTemp4.textContent = (await getUrlJson.list[30].main.temp_max - 273).toFixed(2)
+        minTemp5.textContent = (await getUrlJson.list[36].main.temp_min - 273).toFixed(2)
+        maxTemp5.textContent = (await getUrlJson.list[36].main.temp_max - 273).toFixed(2)
+        // a render function that takes getUrlJson as a parameter
+        todayTempDisplay.textContent = todayTemp
+        let windSpeed = getUrlJson.list[0].wind.speed;
+        windSpeedDisplay.textContent = windSpeed
+        let humidity = getUrlJson.list[0].main.humidity;
+        humidityDisplay.textContent = humidity;
+        inputRange.value = humidity;
+        let visibility = getUrlJson.list[0].visibility;
+        // convert meters to miles
+        let convertedVisibility = (visibility * 0.000621371).toFixed(2)
+        visibiltyDisplay.textContent = convertedVisibility;
+        let airPressure = getUrlJson.list[0].main.pressure;
+        airPressureDisplay.textContent = airPressure
+        testImg.setAttribute('src', `http://openweathermap.org/img/wn/${imgId}@2x.png`);
+        cityInfo.textContent = getUrlJson.city.name;
+        console.log(getUrlJson);
+        console.log(jsonData)
+    }
+    catch {
+        console.log('not found')
+    }
+})
 const cancelBtn = document.querySelector('.cancelBtn');
 const searchForPlacesBtn = document.querySelector('.searchBtn');
 const firstPage = document.querySelector('#firstPage');

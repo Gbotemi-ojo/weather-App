@@ -9,7 +9,6 @@ body {
     height: 100vh;
     background: #1E213A;
 }
-
 .theapp {
     margin: 0;
     padding: 0;
@@ -18,7 +17,6 @@ body {
     display: grid;
     grid-template-columns: 1.5fr 3fr;
 }
-
 #firstPage {
     background: #1E213A;
     display: flex;
@@ -211,6 +209,7 @@ body {
 
 .searchHistoryContainer>div {
     display: flex;
+    justify-content: space-around;
     align-items: center;
     height: 64px;
     width: 100%;
