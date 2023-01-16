@@ -110,10 +110,6 @@ searchBtn.addEventListener('click', () => {
    div.textContent = inputLocation.value;
    searchHistoryContainer.append(div);
 })
-function searchHistory(location){
-    this.location = location
-}
-let london = new searchHistory('london');
 
 const cancelBtn = document.querySelector('.cancelBtn');
 const searchForPlacesBtn = document.querySelector('.searchBtn');
