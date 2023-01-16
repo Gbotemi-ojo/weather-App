@@ -184,3 +184,4 @@ reverse = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=44.
 
 'BodEl6mvkYI8vSk3kzoJlHnPMs47bChX'
 fetch('https://api.giphy.com/v1/gifs/translate?api_key=BodEl6mvkYI8vSk3kzoJlHnPMs47bChX&s=cats', { mode: 'cors' });
+const date = new Date();

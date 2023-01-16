@@ -9,6 +9,13 @@ body {
     height: 100vh;
     background: #1E213A;
 }
+.deleteBtn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+}
 .theapp {
     margin: 0;
     padding: 0;
