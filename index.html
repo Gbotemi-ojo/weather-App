@@ -32,7 +32,7 @@
                     <span>
                         <img src="weather-app-master/kindpng_1084511.png" alt="" class="locationImg">
                     </span>
-                    <span>Tokyo</span>
+                    <span class="cityInfo">Tokyo</span>
                 </div>
             </div>
         </div>
@@ -63,31 +63,46 @@
                 <div>
                     <div>Tomorrow</div>
                     <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
-                    <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    <div class="tempRangeContainer">
+                        <div><span><span class="maxTemp1">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <div><span><span class="minTemp1">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    </div>
                     <!-- if temp === 15,make min temp 13 and max temp 17 -->
                 </div>
                 <div>
-                    <div>Jan 11</div>
-                    <div><img src="weather-app-master/Shower.png" alt="" class="futureCastImg"></div>
-                    <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    <div class="dayValue0"></div>
+                    <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
+                    <div class="tempRangeContainer">
+                        <div><span><span class="maxTemp2">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <div><span><span class="minTemp2">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    </div>
                     <!-- if temp === 15,make min temp 13 and max temp 17 -->
                 </div>
                 <div>
-                    <div>Jan 12</div>
-                    <div><img src="weather-app-master/Sleet.png" alt="" class="futureCastImg"></div>
-                    <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    <div class="dayValue1">Tomorrow</div>
+                    <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
+                    <div class="tempRangeContainer">
+                        <div><span><span class="maxTemp3">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <div><span><span class="minTemp3">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    </div>
                     <!-- if temp === 15,make min temp 13 and max temp 17 -->
                 </div>
                 <div>
-                    <div>Jan 13</div>
-                    <div><img src="weather-app-master/Clear.png" alt="" class="futureCastImg"></div>
-                    <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    <div class="dayValue2">Tomorrow</div>
+                    <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
+                    <div class="tempRangeContainer">
+                        <div><span><span class="maxTemp4">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <div><span><span class="minTemp4">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    </div>
                     <!-- if temp === 15,make min temp 13 and max temp 17 -->
                 </div>
                 <div>
-                    <div>Jan 14</div>
-                    <div><img src="weather-app-master/Hail.png" alt="" class="futureCastImg"></div>
-                    <div><span><span>16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    <div class="dayValue3">Tomorrow</div>
+                    <div><img src="weather-app-master/LightRain.png" alt="" class="futureCastImg"></div>
+                    <div class="tempRangeContainer">
+                        <div><span><span class="maxTemp5">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                        <div><span><span class="minTemp5">16</span><sup>o</sup><span>C</span></span><span></span></div>
+                    </div>
                     <!-- if temp === 15,make min temp 13 and max temp 17 -->
                 </div>
             </div>
@@ -96,7 +111,7 @@
                 <div class="weatherStatus">
                     <div>
                         <div class="weatherType">Wind Status</div>
-                        <div><span class="weatherValue">7</span><span class="measurement">Mph</span></div>
+                        <div><span class="weatherValue windSpeed">7</span><span class="measurement">Mph</span></div>
                         <div class="arrowImgContainer">
                             <div class="arrowImg"><img
                                     src="https://www.pngimages.pics/images/quotes/english/general/transparent-45-degree-angle-arrow-52650-152615.png">
@@ -106,7 +121,7 @@
                     </div>
                     <div>
                         <div class="weatherType">Humidity</div>
-                        <div><span class="weatherValue">84</span class="measurement">%</div>
+                        <div><span class="weatherValue humidity">84</span class="measurement">%</div>
                         <div class="rangeDisplay">
                             <div class="rangeValue"><span>0</span><span>50</span><span>100</span></div>
                             <input type="range" min="0" max="100" value="84" disabled class="inputRange">
@@ -115,18 +130,20 @@
                     </div>
                     <div>
                         <div class="weatherType">Visibilty</div>
-                        <div><span class="weatherValue">6,4</span class="measurement"><span
+                        <div><span class="weatherValue visibilty">6,4</span class="measurement"><span
                                 class="measurement">Miles</span></div>
                     </div>
                     <div>
                         <div class="weatherType">Air Pressure</div>
-                        <div><span class="weatherValue">99</span><span class="measurement">MB</span></div>
+                        <div><span class="weatherValue airPressure">99</span><span class="measurement">MB</span></div>
                     </div>
                 </div>
                 <div class="credit">Created by Gbotemi - devChallenges.io</div>
             </div>
         </div>
     </div>
+    <div class="texty"></div>
+    <img src="" alt="" class="testImg">
     <script src="script.js"></script>
 </body>
 

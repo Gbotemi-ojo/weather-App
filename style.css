@@ -376,6 +376,11 @@ body {
 .measurement {
     font-size: 36px;
 }
+.tempRangeContainer{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+}
 
 @media(max-width:600px) {
     .theapp {
@@ -387,6 +392,6 @@ body {
     }
 
     .futureCastContainer>div {
-        width: 300px;
+        width: 350px;
     }
 }
