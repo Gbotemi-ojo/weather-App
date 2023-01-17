@@ -18,66 +18,78 @@ const todayWeatherImg = document.querySelector('.todayWeatherImg');
 locationBtn.addEventListener('click', getWeatherData);
 searchBtn.addEventListener('click', searchLocation);
 const cityInfo = document.querySelector('.cityInfo');
+async function fetchData(latitude,longitude){
+    const getUrl = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
+    const data = await getUrl.json();
+    return data;
+}
+async function MinTempData(data){
+    const minTemp1 = (await data.list[8].main.temp_min - 273).toFixed(2);
+    const minTemp2 = (await data.list[16].main.temp_min - 273).toFixed(2);
+    const minTemp3 = (await data.list[24].main.temp_min - 273).toFixed(2);
+    const minTemp4 = (await data.list[30].main.temp_min - 273).toFixed(2);
+    const minTemp5 = (await data.list[36].main.temp_min - 273).toFixed(2);
+    const minTempArray = [
+        minTemp1,minTemp2,minTemp3,minTemp4,minTemp5
+    ]
+    return minTempArray;
+}
+async function maxTempData(data){
+    const maxTemp1 = (await data.list[8].main.temp_max - 273).toFixed(2);
+    const maxTemp2 = (await data.list[16].main.temp_max - 273).toFixed(2);
+    const maxTemp3 = (await data.list[24].main.temp_max - 273).toFixed(2);
+    const maxTemp4 = (await data.list[30].main.temp_max - 273).toFixed(2);
+    const maxTemp5 = (await data.list[36].main.temp_max - 273).toFixed(2);
+    const maxTempArray = [
+        maxTemp1,maxTemp2,maxTemp3,maxTemp4,maxTemp5
+    ]
+    return maxTempArray;
+}
+async function weatherIconsData(data){
+    const weatherIconImg1 = await data.list[8].weather[0].icon;
+    const weatherIconImg2 = await data.list[16].weather[0].icon;
+    const weatherIconImg3 = await data.list[24].weather[0].icon;
+    const weatherIconImg4 = await data.list[30].weather[0].icon;
+    const weatherIconImg5 = await data.list[36].weather[0].icon;
+    const weatherIconArray = [
+        weatherIconImg1,weatherIconImg2,weatherIconImg3,weatherIconImg4,weatherIconImg5
+    ]
+    return weatherIconArray;
+}
+async function renderData(data){
+    const imgId = await data.list[0].weather[0].icon;
+    const todayTemp = (await data.list[0].main.feels_like - 273).toFixed(2);
+    const tempDetail = await data.list[0].weather[0].description;
+    tempDetailDisplay.textContent = tempDetail;
+    todayTempDisplay.textContent = todayTemp;
+    const windSpeed = await data.list[0].wind.speed;
+    windSpeedDisplay.textContent = windSpeed;
+    const humidity = await data.list[0].main.humidity;
+    humidityDisplay.textContent = humidity;
+    inputRange.value = humidity;
+    const visibility = await data.list[0].visibility;
+    const convertedVisibility = (visibility * 0.000621371).toFixed(2);
+    visibiltyDisplay.textContent = convertedVisibility;
+    const airPressure = data.list[0].main.pressure;
+    airPressureDisplay.textContent = airPressure;
+    todayWeatherImg.setAttribute('src', `http://openweathermap.org/img/wn/${imgId}@2x.png`);
+    cityInfo.textContent = data.city.name;
+}
 async function getWeatherData() {
     const weatherInfo = async (location) => {
-        location = await location
+        location = await location;
         const longitude = await location.coords.longitude;
         const latitude = await location.coords.latitude;
-        let getUrl = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
-        let getUrlJson = await getUrl.json();
-        let imgId = await getUrlJson.list[0].weather[0].icon;
-        const weatherIconImg1 = await getUrlJson.list[8].weather[0].icon;
-        const weatherIconImg2 = await getUrlJson.list[16].weather[0].icon;
-        const weatherIconImg3 = await getUrlJson.list[24].weather[0].icon;
-        const weatherIconImg4 = await getUrlJson.list[30].weather[0].icon;
-        const weatherIconImg5 = await getUrlJson.list[36].weather[0].icon;
-        let todayTemp =   (await getUrlJson.list[0].main.feels_like - 273).toFixed(2)
-        const tempDetail = await getUrlJson.list[0].weather[0].description
-        const minTemp1 = (await getUrlJson.list[8].main.temp_min - 273).toFixed(2);
-        const maxTemp1 = (await getUrlJson.list[8].main.temp_max - 273).toFixed(2);
-        const minTemp2 = (await getUrlJson.list[16].main.temp_min - 273).toFixed(2);
-        const maxTemp2 = (await getUrlJson.list[16].main.temp_max - 273).toFixed(2);
-        const minTemp3 = (await getUrlJson.list[24].main.temp_min - 273).toFixed(2);
-        const maxTemp3 = (await getUrlJson.list[24].main.temp_max - 273).toFixed(2);
-        const minTemp4= (await getUrlJson.list[30].main.temp_min - 273).toFixed(2);
-        const maxTemp4 = (await getUrlJson.list[30].main.temp_max - 273).toFixed(2);
-        const minTemp5 = (await getUrlJson.list[36].main.temp_min - 273).toFixed(2);
-        const maxTemp5 = (await getUrlJson.list[36].main.temp_max - 273).toFixed(2);
-        let minTempArray = [
-            minTemp1,minTemp2,minTemp3,minTemp4,minTemp5
-        ]
-        let maxTempArray = [
-            maxTemp1,maxTemp2,maxTemp3,maxTemp4,maxTemp5
-        ]
-        let futureCastArray = [
-            weatherIconImg1,
-            weatherIconImg2,
-            weatherIconImg3,
-            weatherIconImg4,
-            weatherIconImg5
-        ]
-        console.log(tempDetail)
-        tempDetailDisplay.textContent = tempDetail
-        // a render function that takes getUrlJson as a parameter
-        todayTempDisplay.textContent = todayTemp
-        let windSpeed = getUrlJson.list[0].wind.speed;
-        windSpeedDisplay.textContent = windSpeed;
-        let humidity = getUrlJson.list[0].main.humidity;
-        humidityDisplay.textContent = humidity;
-        inputRange.value = humidity;
-        let visibility = getUrlJson.list[0].visibility;
-        // convert meters to miles
-        let convertedVisibility = (visibility * 0.000621371).toFixed(2)
-        visibiltyDisplay.textContent = convertedVisibility;
-        let airPressure = getUrlJson.list[0].main.pressure;
-        airPressureDisplay.textContent = airPressure;
-        todayWeatherImg.setAttribute('src', `http://openweathermap.org/img/wn/${imgId}@2x.png`);
-        cityInfo.textContent = getUrlJson.city.name;
-        console.log(getUrlJson);
+        let data = await fetchData(latitude,longitude);
+        let weathericonsArray = await weatherIconsData(data)
+        let minTempArray = await MinTempData(data)
+        let maxTempArray = await maxTempData(data)
+        renderData(data)
+        console.log(data);
         for (let i = 0; i <= 5; i++) {
-            futureCastImg[i].setAttribute('src', `http://openweathermap.org/img/wn/${futureCastArray[i]}@2x.png`);
             minTemp[i].textContent = minTempArray[i];
             maxTemp[i].textContent = maxTempArray[i];
+            futureCastImg[i].setAttribute('src', `http://openweathermap.org/img/wn/${weathericonsArray[i]}@2x.png`);
         }
     }
     let failure = (err) => {
@@ -91,37 +103,17 @@ async function searchLocation() {
         const jsonData = await userData.json();
         const latitude = jsonData.coord.lat
         const longitude = jsonData.coord.lon
-        let getUrl = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
-        let getUrlJson = await getUrl.json();
-        let imgId = await getUrlJson.list[0].weather[0].icon;
-        let todayTemp = await (getUrlJson.list[0].main.feels_like - 273).toFixed(2)
-        minTemp1.textContent = (await getUrlJson.list[8].main.temp_min - 273).toFixed(2)
-        maxTemp1.textContent = (await getUrlJson.list[8].main.temp_max - 273).toFixed(2)
-        minTemp2.textContent = (await getUrlJson.list[16].main.temp_min - 273).toFixed(2)
-        maxTemp2.textContent = (await getUrlJson.list[16].main.temp_max - 273).toFixed(2)
-        minTemp3.textContent = (await getUrlJson.list[24].main.temp_min - 273).toFixed(2)
-        maxTemp3.textContent = (await getUrlJson.list[24].main.temp_max - 273).toFixed(2)
-        minTemp4.textContent = (await getUrlJson.list[30].main.temp_min - 273).toFixed(2)
-        maxTemp4.textContent = (await getUrlJson.list[30].main.temp_max - 273).toFixed(2)
-        minTemp5.textContent = (await getUrlJson.list[36].main.temp_min - 273).toFixed(2)
-        maxTemp5.textContent = (await getUrlJson.list[36].main.temp_max - 273).toFixed(2)
-        // a render function that takes getUrlJson as a parameter
-        todayTempDisplay.textContent = todayTemp
-        let windSpeed = getUrlJson.list[0].wind.speed;
-        windSpeedDisplay.textContent = windSpeed
-        let humidity = getUrlJson.list[0].main.humidity;
-        humidityDisplay.textContent = humidity;
-        inputRange.value = humidity;
-        let visibility = getUrlJson.list[0].visibility;
-        // convert meters to miles
-        let convertedVisibility = (visibility * 0.000621371).toFixed(2)
-        visibiltyDisplay.textContent = convertedVisibility;
-        let airPressure = getUrlJson.list[0].main.pressure;
-        airPressureDisplay.textContent = airPressure
-        todayWeatherImg.setAttribute('src', `http://openweathermap.org/img/wn/${imgId}@2x.png`);
-        cityInfo.textContent = getUrlJson.city.name;
-        console.log(getUrlJson);
-        console.log(jsonData)
+        let data = await fetchData(latitude, longitude);
+        let weathericonsArray = await weatherIconsData(data)
+        let minTempArray = await MinTempData(data)
+        let maxTempArray = await maxTempData(data)
+        renderData(data)
+        console.log(data);
+        for (let i = 0; i <= 5; i++) {
+            minTemp[i].textContent = minTempArray[i];
+            maxTemp[i].textContent = maxTempArray[i];
+            futureCastImg[i].setAttribute('src', `http://openweathermap.org/img/wn/${weathericonsArray[i]}@2x.png`);
+        }
     }
     catch {
         console.log('not found')
@@ -149,37 +141,17 @@ searchHistoryContainer.addEventListener('click', async (e) => {
         const jsonData = await userData.json();
         const latitude = jsonData.coord.lat;
         const longitude = jsonData.coord.lon;
-        let getUrl = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
-        let getUrlJson = await getUrl.json();
-        let imgId = await getUrlJson.list[0].weather[0].icon;
-        let todayTemp = await (getUrlJson.list[0].main.feels_like - 273).toFixed(2)
-        minTemp1.textContent = (await getUrlJson.list[8].main.temp_min - 273).toFixed(2)
-        maxTemp1.textContent = (await getUrlJson.list[8].main.temp_max - 273).toFixed(2)
-        minTemp2.textContent = (await getUrlJson.list[16].main.temp_min - 273).toFixed(2)
-        maxTemp2.textContent = (await getUrlJson.list[16].main.temp_max - 273).toFixed(2)
-        minTemp3.textContent = (await getUrlJson.list[24].main.temp_min - 273).toFixed(2)
-        maxTemp3.textContent = (await getUrlJson.list[24].main.temp_max - 273).toFixed(2)
-        minTemp4.textContent = (await getUrlJson.list[30].main.temp_min - 273).toFixed(2)
-        maxTemp4.textContent = (await getUrlJson.list[30].main.temp_max - 273).toFixed(2)
-        minTemp5.textContent = (await getUrlJson.list[36].main.temp_min - 273).toFixed(2)
-        maxTemp5.textContent = (await getUrlJson.list[36].main.temp_max - 273).toFixed(2)
-        // a render function that takes getUrlJson as a parameter
-        todayTempDisplay.textContent = todayTemp;
-        let windSpeed = getUrlJson.list[0].wind.speed;
-        windSpeedDisplay.textContent = windSpeed;
-        let humidity = getUrlJson.list[0].main.humidity;
-        humidityDisplay.textContent = humidity;
-        inputRange.value = humidity;
-        let visibility = getUrlJson.list[0].visibility;
-        // convert meters to miles
-        let convertedVisibility = (visibility * 0.000621371).toFixed(2)
-        visibiltyDisplay.textContent = convertedVisibility;
-        let airPressure = getUrlJson.list[0].main.pressure;
-        airPressureDisplay.textContent = airPressure
-        todayWeatherImg.setAttribute('src', `http://openweathermap.org/img/wn/${imgId}@2x.png`);
-        cityInfo.textContent = getUrlJson.city.name;
-        console.log(getUrlJson);
-        console.log(jsonData)
+        let data = await fetchData(latitude, longitude);
+        let weathericonsArray = await weatherIconsData(data)
+        let minTempArray = await MinTempData(data)
+        let maxTempArray = await maxTempData(data)
+        renderData(data)
+        console.log(data);
+        for (let i = 0; i <= 5; i++) {
+            minTemp[i].textContent = minTempArray[i];
+            maxTemp[i].textContent = maxTempArray[i];
+            futureCastImg[i].setAttribute('src', `http://openweathermap.org/img/wn/${weathericonsArray[i]}@2x.png`);
+        }
     }
     catch {
         console.log('not found')
@@ -199,22 +171,33 @@ searchForPlacesBtn.addEventListener('click', () => {
 })
 firstPage.style.display = 'flex';
 searchPageContainer.style.display = 'none';
+celciusBtn.disabled = true
 celciusBtn.addEventListener('click', () => {
-    // convert to celcius
+    celciusBtn.disabled = true
+    farenheitBtn.disabled = false
+    minTemp.forEach(temp => {
+        let celcius = (+temp.textContent - 32) * 5/9;
+        temp.textContent = celcius.toFixed(2)
+    });
+    maxTemp.forEach(temp => {
+        let celcius = (+temp.textContent - 32) * 5 / 9;
+        temp.textContent = celcius.toFixed(2)
+    });
+
 })
 farenheitBtn.addEventListener('click', () => {
-    // (0°C × 9 / 5) + 32 = 32°F
-    let farenheit = (+minTemp1.textContent * 9 / 5) + 32;
-    minTemp1.textContent = farenheit
-    // convert to farenheit
+    farenheitBtn.disabled = true
+    celciusBtn.disabled = false
+    minTemp.forEach(temp => {
+        let farenheit = (+temp.textContent * 9 / 5) + 32;
+        temp.textContent = farenheit.toFixed(2);
+    });
+    maxTemp.forEach(temp => {
+        let farenheit = (+temp.textContent * 9 / 5) + 32;
+        temp.textContent = farenheit.toFixed(2);
+    });
+
 });
-let link = 'https://api.openweathermap.org/data/2.5/weather?q=London&APPID=3f48274a20bac99a1e52fb12652e7fdc';
-
-link2 = 'api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=3f48274a20bac99a1e52fb12652e7fdc';
-reverse = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=44.34&longitude=10.99&localityLanguage=en';
-
-'BodEl6mvkYI8vSk3kzoJlHnPMs47bChX'
-fetch('https://api.giphy.com/v1/gifs/translate?api_key=BodEl6mvkYI8vSk3kzoJlHnPMs47bChX&s=cats', { mode: 'cors' });
 // time function;
 let setDate = (function() {
     const currentDay = new Date()
