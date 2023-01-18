@@ -123,6 +123,7 @@ async function searchLocation() {
         console.log('not found')
     }
 }
+
 const searchHistoryContainer = document.querySelector('.searchHistoryContainer');
 searchBtn.addEventListener('click', () => {
     let searchText = document.createElement('div');
@@ -233,3 +234,28 @@ let setDate = (function() {
         dayValues[i].textContent = dateArray[i]
     }
 })()
+// initial rendering
+async function initialsearchLocation() {
+    try {
+        const userData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=dubai&APPID=3f48274a20bac99a1e52fb12652e7fdc`, { mode: 'cors' })
+        const jsonData = await userData.json();
+        const latitude = jsonData.coord.lat
+        const longitude = jsonData.coord.lon
+        let data = await fetchData(latitude, longitude);
+        let weathericonsArray = await weatherIconsData(data)
+        let minTempArray = await MinTempData(data)
+        let maxTempArray = await maxTempData(data)
+        renderData(data);
+        celciusBtn.click()
+        console.log(data);
+        for (let i = 0; i <= 5; i++) {
+            minTemp[i].textContent = minTempArray[i];
+            maxTemp[i].textContent = maxTempArray[i];
+            futureCastImg[i].setAttribute('src', `http://openweathermap.org/img/wn/${weathericonsArray[i]}@2x.png`);
+        }
+    }
+    catch {
+        console.log('not found')
+    }
+}
+initialsearchLocation()
