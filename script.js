@@ -15,6 +15,8 @@ const airPressureDisplay = document.querySelector('.airPressure');
 const inputLocation = document.querySelector('.inputLocation');
 const searchBtn = document.querySelector('.searchLocation');
 const todayWeatherImg = document.querySelector('.todayWeatherImg');
+const tempScale = document.querySelectorAll('.tempScale');
+const celciusText = document.querySelector('.celciusText');
 locationBtn.addEventListener('click', getWeatherData);
 searchBtn.addEventListener('click', searchLocation);
 const cityInfo = document.querySelector('.cityInfo');
@@ -81,11 +83,12 @@ async function getWeatherData() {
         const longitude = await location.coords.longitude;
         const latitude = await location.coords.latitude;
         let data = await fetchData(latitude,longitude);
-        let weathericonsArray = await weatherIconsData(data)
-        let minTempArray = await MinTempData(data)
-        let maxTempArray = await maxTempData(data)
-        renderData(data)
+        let weathericonsArray = await weatherIconsData(data);
+        let minTempArray = await MinTempData(data);
+        let maxTempArray = await maxTempData(data);
+        renderData(data);
         console.log(data);
+        celciusBtn.click();
         for (let i = 0; i <= 5; i++) {
             minTemp[i].textContent = minTempArray[i];
             maxTemp[i].textContent = maxTempArray[i];
@@ -107,7 +110,8 @@ async function searchLocation() {
         let weathericonsArray = await weatherIconsData(data)
         let minTempArray = await MinTempData(data)
         let maxTempArray = await maxTempData(data)
-        renderData(data)
+        renderData(data);
+        celciusBtn.click()
         console.log(data);
         for (let i = 0; i <= 5; i++) {
             minTemp[i].textContent = minTempArray[i];
@@ -147,6 +151,7 @@ searchHistoryContainer.addEventListener('click', async (e) => {
         let maxTempArray = await maxTempData(data)
         renderData(data)
         console.log(data);
+        celciusBtn.click()
         for (let i = 0; i <= 5; i++) {
             minTemp[i].textContent = minTempArray[i];
             maxTemp[i].textContent = maxTempArray[i];
@@ -171,23 +176,31 @@ searchForPlacesBtn.addEventListener('click', () => {
 })
 firstPage.style.display = 'flex';
 searchPageContainer.style.display = 'none';
-celciusBtn.disabled = true
+celciusBtn.disabled = true;
 celciusBtn.addEventListener('click', () => {
-    celciusBtn.disabled = true
-    farenheitBtn.disabled = false
+    celciusBtn.disabled = true;
+    farenheitBtn.disabled = false;
+    const celcius = (+todayTempDisplay.textContent - 32) * 5 / 9;
+    todayTempDisplay.textContent = celcius.toFixed(2)
+    celciusText.textContent = 'C';
     minTemp.forEach(temp => {
         let celcius = (+temp.textContent - 32) * 5/9;
-        temp.textContent = celcius.toFixed(2)
+        temp.textContent = celcius.toFixed(2);
     });
     maxTemp.forEach(temp => {
         let celcius = (+temp.textContent - 32) * 5 / 9;
-        temp.textContent = celcius.toFixed(2)
+        temp.textContent = celcius.toFixed(2);
     });
-
-})
+    tempScale.forEach(unit => {
+        unit.textContent = 'C';
+    });
+});
 farenheitBtn.addEventListener('click', () => {
-    farenheitBtn.disabled = true
-    celciusBtn.disabled = false
+    farenheitBtn.disabled = true;
+    celciusBtn.disabled = false;
+    const farenheit = (+todayTempDisplay.textContent * 9 / 5) + 32;
+    todayTempDisplay.textContent = farenheit.toFixed(2)
+    celciusText.textContent = 'F'
     minTemp.forEach(temp => {
         let farenheit = (+temp.textContent * 9 / 5) + 32;
         temp.textContent = farenheit.toFixed(2);
@@ -196,7 +209,9 @@ farenheitBtn.addEventListener('click', () => {
         let farenheit = (+temp.textContent * 9 / 5) + 32;
         temp.textContent = farenheit.toFixed(2);
     });
-
+    tempScale.forEach(unit => {
+        unit.textContent = 'F';
+    });
 });
 // time function;
 let setDate = (function() {
