@@ -10,7 +10,7 @@ body {
     background: #1E213A;
     font-family: 'Josefin Sans', sans-serif;
 }
-.weatherStatus
+.measurement
 .deleteBtn{
     display: flex;
     justify-content: flex-end;
@@ -381,7 +381,10 @@ body {
     font-size: 64px;
     font-weight: 700;
 }
-
+.rangeDisplay > div:nth-child(3){
+    display: flex;
+    justify-content: flex-end;
+}
 .measurement {
     font-size: 36px;
 }
