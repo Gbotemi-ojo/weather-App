@@ -36,6 +36,9 @@ async function MinTempData(data){
     ]
     return minTempArray;
 }
+function timer(){
+    return "work in progress"
+}
 async function maxTempData(data){
     const maxTemp1 = (await data.list[8].main.temp_max - 273).toFixed(2);
     const maxTemp2 = (await data.list[16].main.temp_max - 273).toFixed(2);
